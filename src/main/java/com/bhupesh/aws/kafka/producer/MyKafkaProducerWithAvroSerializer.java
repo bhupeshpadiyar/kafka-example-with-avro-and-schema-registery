@@ -13,7 +13,7 @@ import java.util.Properties;
 public class MyKafkaProducerWithAvroSerializer {
 public static void main(String[] args) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "localhost:29092");
 
         Producer<Integer, AvroMessage> producer = new KafkaProducer<>(props, new IntegerSerializer(), new AvroMessageSerializer());
         for (int i = 1; i <= 10; i++){
