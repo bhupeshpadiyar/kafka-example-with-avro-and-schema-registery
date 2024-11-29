@@ -7,15 +7,8 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 
 import org.apache.avro.generic.GenericRecord;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Properties;
-import java.util.Random;
 
 
 public class GenericAvroConsumer {
@@ -32,8 +25,29 @@ public class GenericAvroConsumer {
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put("schema.registry.url", "http://localhost:8081");
 
+        consumerSingleSchemaExample(props);
+       
+    }
 
-        String topic = "topic1";
+    private static void consumerSingleSchemaExample(Properties props) {
+        String topic = "users-topic";
+        final Consumer<String, GenericRecord> consumer = new KafkaConsumer<String, GenericRecord>(props);
+        consumer.subscribe(Arrays.asList(topic));
+
+        try {
+            while (true) {
+                ConsumerRecords<String, GenericRecord> records = consumer.poll(100);
+                for (ConsumerRecord<String, GenericRecord> record : records) {
+                    System.out.printf("offset = %d, key = %s, value = %s \n", record.offset(), record.key(), record.value());
+                }
+            }
+        } finally {
+            consumer.close();
+        }       
+    }
+
+    private static void consumerListSchemaExample(Properties props) {
+        String topic = "transactions1";
         final Consumer<String, GenericRecord> consumer = new KafkaConsumer<String, GenericRecord>(props);
         consumer.subscribe(Arrays.asList(topic));
 

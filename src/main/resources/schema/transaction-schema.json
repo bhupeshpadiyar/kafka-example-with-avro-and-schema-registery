@@ -1,0 +1,9 @@
+{
+    "type": "record",
+    "name": "txnrecord",
+    "fields": [
+       {"name": "f1", "type": "string"},
+       {"name": "id", "type": "string"},
+       {"name": "amount", "type": "int"} 
+   ]
+}

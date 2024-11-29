@@ -1,0 +1,43 @@
+[
+  {
+    "type": "record",
+    "name": "PhoneNumber",
+    "fields": [
+      {
+        "name": "id",
+        "type": "long",
+        "doc": "Attribute id"
+      },
+      {
+        "name": "updateDate",
+        "type": "long",
+        "doc": "Update date of the attribute"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "doc": "Value of the attribute"
+      }
+    ]
+  },
+  {
+    "type": "record",
+    "name": "User",
+    "fields": [
+      {
+        "name": "timestamp",
+        "type": "long"
+      },
+      {
+        "name": "username",
+        "type": "string"
+      },
+      {
+        "name": "phoneNumbers",
+        "type": ["null", {
+            "type" : "array", "items": "PhoneNumber"
+        }]
+      }
+    ]
+  }
+]

@@ -8,6 +8,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+      - "8080:8080"
 
   schema-registry:
     image: confluentinc/cp-schema-registry:latest

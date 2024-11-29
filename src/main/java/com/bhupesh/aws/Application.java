@@ -1,5 +1,9 @@
 package com.bhupesh.aws;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.Set;
 
@@ -9,6 +13,7 @@ import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.util.ResourceUtils;
 
 @SpringBootApplication
 public class Application  implements CommandLineRunner{
@@ -17,11 +22,13 @@ public class Application  implements CommandLineRunner{
 		SpringApplication.run(Application.class, args);
 	}
 
+    
 	@Override
 	public void run(String... args) throws Exception {
+
 		
 		Properties props = new Properties();
-        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.setProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
 
         try(AdminClient adminClient = AdminClient.create(props)){
             ListTopicsResult topicsResult = adminClient.listTopics();
